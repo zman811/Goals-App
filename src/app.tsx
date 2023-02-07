@@ -1,6 +1,6 @@
 //import * as React from 'react';
 // import * as ReactDOM from 'react-dom';
-import Main from "./components/test";
+import Main from "./main/App";
 import { createRoot } from "react-dom/client";
 import { MantineProvider } from "@mantine/core";
 import React from "react";
