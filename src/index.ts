@@ -26,6 +26,12 @@ const createWindow = (): void => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  // testing
+  mainWindow.on('resize', () => {
+    // const { width, height } = mainWindow.getBounds();
+    // console.log(app.getPath("appData"))
+  })
 };
 
 // This method will be called when Electron has finished
