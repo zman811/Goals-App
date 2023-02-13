@@ -5,7 +5,9 @@ export default function Main() {
   return (
     <main>
       <Title order={2}>test</Title>
-      <Button>test</Button>
+      <Button onClick={() => {
+        window.store.name('testing')
+      }}>test</Button>
     </main>
   );
 }
