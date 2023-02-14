@@ -24,6 +24,10 @@ const createWindow = (): void => {
     store.set('name', {name})
     console.log(store.get('name'))
   })
+  ipcMain.on('getName', (event) => {
+    const name:string = store.get('name')
+    event.sender.send('sendName', name)
+  })
   const mainWindow = new BrowserWindow({
     height: size.height,
     width: size.width,

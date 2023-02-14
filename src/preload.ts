@@ -7,6 +7,8 @@ import {contextBridge, ipcRenderer} from 'electron'
 contextBridge.exposeInMainWorld(
   'store',
   {
-    name: (name:string) => ipcRenderer.send('name', name)
+    name: (name:string) => ipcRenderer.send('name', name),
+    getName: () => ipcRenderer.send('getName'),
+    reciveName: () => ipcRenderer.on('sendName', (event, name) => console.log('preload', name))
   }
 )
