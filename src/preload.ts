@@ -9,6 +9,6 @@ contextBridge.exposeInMainWorld(
   {
     name: (name:string) => ipcRenderer.send('name', name),
     getName: () => ipcRenderer.send('getName'),
-    reciveName: () => ipcRenderer.on('sendName', (event, name) => console.log('preload', name))
+    reciveName: (fn) => ipcRenderer.on('sendName', (event, name) => fn(name)),
   }
 )

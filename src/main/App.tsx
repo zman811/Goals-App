@@ -1,9 +1,11 @@
 import { Title, Button, Text } from "@mantine/core";
-import React from "react";
+import React, {useState} from "react";
 
 export default function Main() {
-  let name = {}
-  let test = window.store.reciveName()
+  const [name, setName] = useState({})
+  let test = window.store.reciveName((arg) => setName(arg))
+  window.store.getName()
+  // console.log('here', test)
 
   return (
     <main>
@@ -12,6 +14,9 @@ export default function Main() {
       <Button onClick={() => {
         window.store.name('testing')
       }}>test</Button>
+      <Button onClick={() =>
+      window.store.getName()
+      }>Getname</Button>
     </main>
   );
 }
