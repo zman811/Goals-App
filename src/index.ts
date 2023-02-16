@@ -19,11 +19,7 @@ const createWindow = (): void => {
     height: 600,
   };
   // Create the browser window.
-  ipcMain.on('name', (_, name) => {
-    console.log(name)
-    store.set('name', {name})
-    console.log(store.get('name'))
-  })
+
 
   const mainWindow = new BrowserWindow({
     height: size.height,
@@ -49,6 +45,11 @@ const createWindow = (): void => {
   ipcMain.on('getName', (event) => {
     const name:string = store.get('name')
     mainWindow.webContents.send('sendName', name)
+  })
+  ipcMain.on('name', (_, name) => {
+    console.log(name)
+    store.set('name', {name})
+    mainWindow.webContents.send('sendName', {name})
   })
 };
 
