@@ -42,7 +42,7 @@ const createWindow = (): void => {
     store.set("windowSize", size);
     // console.log(size)
   });
-  ipcMain.on('getName', (event) => {
+  ipcMain.on('getName', () => {
     const name:string = store.get('name')
     mainWindow.webContents.send('sendName', name)
   })
