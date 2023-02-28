@@ -19,6 +19,7 @@ export default function Main() {
           <Button
             style={{ margin: "10px" }}
             onClick={() => {
+              if(val === '') return
               window.store.name(val);
               setVal("");
             }}

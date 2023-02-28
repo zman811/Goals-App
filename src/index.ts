@@ -47,7 +47,6 @@ const createWindow = (): void => {
     mainWindow.webContents.send('sendName', name)
   })
   ipcMain.on('name', (_, name) => {
-    console.log(name)
     store.set('name', {name})
     mainWindow.webContents.send('sendName', {name})
   })
