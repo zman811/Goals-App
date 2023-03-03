@@ -16,7 +16,6 @@ export default function Main() {
   useEffect(() => {
     window.store.reciveName((arg: { name: string }) => setName(arg));
     window.store.getName();
-    // console.log("here add");
   }, []);
 
   return (
@@ -32,11 +31,11 @@ export default function Main() {
             title="Add new goal"
           >
             <Text>What do you need to get done?</Text>
-            <Space h="md"/>
+            <Space h="md" />
             <form>
               {/* set this up to change state and save the value to files */}
               <input />
-              <Space h="lg"/>
+              <Space h="lg" />
               <input type="submit" />
             </form>
           </Modal>

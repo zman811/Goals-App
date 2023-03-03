@@ -2,13 +2,10 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 //const { contextBridge, ipcRenderer } = require('electron')
-import {contextBridge, ipcRenderer} from 'electron'
+import { contextBridge, ipcRenderer } from "electron";
 
-contextBridge.exposeInMainWorld(
-  'store',
-  {
-    name: (name:string) => ipcRenderer.send('name', name),
-    getName: () => ipcRenderer.send('getName'),
-    reciveName: (fn) => ipcRenderer.on('sendName', (event, name) => fn(name)),
-  }
-)
+contextBridge.exposeInMainWorld("store", {
+  name: (name: string) => ipcRenderer.send("name", name),
+  getName: () => ipcRenderer.send("getName"),
+  reciveName: (fn) => ipcRenderer.on("sendName", (_, name) => fn(name)),
+});

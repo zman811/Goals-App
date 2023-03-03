@@ -20,7 +20,6 @@ const createWindow = (): void => {
   };
   // Create the browser window.
 
-
   const mainWindow = new BrowserWindow({
     height: size.height,
     width: size.width,
@@ -42,14 +41,14 @@ const createWindow = (): void => {
     store.set("windowSize", size);
     // console.log(size)
   });
-  ipcMain.on('getName', () => {
-    const name:string = store.get('name')
-    mainWindow.webContents.send('sendName', name)
-  })
-  ipcMain.on('name', (_, name) => {
-    store.set('name', {name})
-    mainWindow.webContents.send('sendName', {name})
-  })
+  ipcMain.on("getName", () => {
+    const name: string = store.get("name");
+    mainWindow.webContents.send("sendName", name);
+  });
+  ipcMain.on("name", (_, name) => {
+    store.set("name", { name });
+    mainWindow.webContents.send("sendName", { name });
+  });
 };
 
 // This method will be called when Electron has finished
