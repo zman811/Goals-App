@@ -8,6 +8,15 @@ import {
   Modal,
 } from "@mantine/core";
 import React, { useState, useEffect } from "react";
+declare global {
+  interface Window {
+    store: {
+      reciveName: (arg: { name: string }) => void;
+      getName: () => void;
+      name: (a: string) => void;
+    };
+  }
+}
 
 export default function Main() {
   const [addGoal, setAddGoal] = useState(false);
@@ -32,26 +41,24 @@ export default function Main() {
           >
             <Text>What do you need to get done?</Text>
             <Space h="md" />
-            <form>
+            <form
+              onSubmit={() => {
+                if (val === "") return;
+                window.store.name(val);
+                setVal("");
+              }}
+            >
               {/* set this up to change state and save the value to files */}
-              <input />
+              <Input
+                value={val}
+                onChange={(e) => setVal(e.target.value)}
+              ></Input>
               <Space h="lg" />
               <input type="submit" />
             </form>
           </Modal>
           <Space h="lg" />
           <Text>{name.name}</Text>
-          <Input value={val} onChange={(e) => setVal(e.target.value)}></Input>
-          <Button
-            style={{ margin: "10px" }}
-            onClick={() => {
-              if (val === "") return;
-              window.store.name(val);
-              setVal("");
-            }}
-          >
-            Set val
-          </Button>
         </div>
       </Center>
     </main>

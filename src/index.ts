@@ -14,6 +14,7 @@ if (require("electron-squirrel-startup")) {
 
 const createWindow = (): void => {
   const store = new Store();
+
   const size: { height: number; width: number } = store.get("windowSize") || {
     width: 800,
     height: 600,
@@ -42,9 +43,13 @@ const createWindow = (): void => {
     // console.log(size)
   });
   ipcMain.on("getName", () => {
-    const name: string = store.get("name");
+    const name = store.get("name");
     mainWindow.webContents.send("sendName", name);
   });
+  // Will need to change name out for goal,
+  /*
+  'goal', {title: '', done: '', extraInfo: ''}
+  */
   ipcMain.on("name", (_, name) => {
     store.set("name", { name });
     mainWindow.webContents.send("sendName", { name });

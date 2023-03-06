@@ -7,5 +7,6 @@ import { contextBridge, ipcRenderer } from "electron";
 contextBridge.exposeInMainWorld("store", {
   name: (name: string) => ipcRenderer.send("name", name),
   getName: () => ipcRenderer.send("getName"),
-  reciveName: (fn) => ipcRenderer.on("sendName", (_, name) => fn(name)),
+  reciveName: (fn: (name: string) => void) =>
+    ipcRenderer.on("sendName", (_, name) => fn(name)),
 });
