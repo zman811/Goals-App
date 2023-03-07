@@ -35,7 +35,7 @@ const createWindow = (): void => {
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
-  // testing
+  // Event listeners
   mainWindow.on("resize", () => {
     const { width, height } = mainWindow.getBounds();
     const size = { width, height };
