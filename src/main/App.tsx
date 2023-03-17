@@ -22,6 +22,7 @@ export default function Main() {
   const [addGoal, setAddGoal] = useState(false);
   const [name, setName] = useState({ name: "" });
   const [val, setVal] = useState("");
+
   useEffect(() => {
     window.store.reciveName((arg: { name: string }) => setName(arg));
     window.store.getName();
