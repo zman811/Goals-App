@@ -14,6 +14,11 @@ declare global {
       reciveName: (arg: { name: string }) => void;
       getName: () => void;
       name: (a: string) => void;
+
+      newTask: (a: string) => void;
+      getTask: () => void;
+      reciveTask: (a: any) => void;
+      delTask: (a: string) => void;
     };
   }
 }
@@ -28,7 +33,7 @@ export default function Main() {
     window.store.getName();
   }, []);
   useEffect(() => {
-    window.store.reciveTask((arg) => console.log(arg));
+    window.store.reciveTask((a) => console.log(a));
     window.store.getTask();
   }, []);
 
