@@ -27,6 +27,10 @@ export default function Main() {
     window.store.reciveName((arg: { name: string }) => setName(arg));
     window.store.getName();
   }, []);
+  useEffect(() => {
+    window.store.reciveTask((arg) => console.log(arg));
+    window.store.getTask();
+  }, []);
 
   return (
     <main>
@@ -61,6 +65,8 @@ export default function Main() {
           <Space h="lg" />
           <Text>{name.name}</Text>
         </div>
+        <Button onClick={() => window.store.newTask('testing3')}>test add</Button>
+        <Button onClick={() => window.store.delTask('testing3')}>test del</Button>
       </Center>
     </main>
   );

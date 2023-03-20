@@ -54,6 +54,23 @@ const createWindow = (): void => {
     store.set("name", { name });
     mainWindow.webContents.send("sendName", { name });
   });
+
+  ipcMain.on('newTask', (_, task) => {
+    store.set(`task.${task}`, task)
+    const getTask = store.get('task')
+    mainWindow.webContents.send('sendTask', getTask)
+  })
+
+  ipcMain.on('getTask', () => {
+    const task = store.get('task')
+    mainWindow.webContents.send('sendTask',task)
+  })
+
+  ipcMain.on('delTask', (_, task) => {
+    store.delete(`task.${task}`)
+    const getTask = store.get('task')
+    mainWindow.webContents.send('sendTask', getTask)
+  })
 };
 
 // This method will be called when Electron has finished
