@@ -15,15 +15,20 @@ if (require("electron-squirrel-startup")) {
 const createWindow = (): void => {
   const store = new Store();
 
-  const size: { height: number; width: number } = store.get("windowSize") || {
-    width: 800,
-    height: 600,
-  };
+  const size: { height: number; width: number; x: number; y: number } =
+    store.get("windowSize") || {
+      width: 800,
+      height: 600,
+      x: 200,
+      y: 200,
+    };
   // Create the browser window.
 
   const mainWindow = new BrowserWindow({
     height: size.height,
     width: size.width,
+    x: size.x,
+    y: size.y,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -37,40 +42,42 @@ const createWindow = (): void => {
 
   // Event listeners
   mainWindow.on("resize", () => {
-    const { width, height } = mainWindow.getBounds();
-    const size = { width, height };
+    const { width, height, x, y } = mainWindow.getBounds();
+    const size = { width, height, x, y };
     store.set("windowSize", size);
-    // console.log(size)
   });
+  mainWindow.on("move", () => {
+    const { width, height, x, y } = mainWindow.getBounds();
+    const size = { width, height, x, y };
+    store.set("windowSize", size);
+  });
+
   ipcMain.on("getName", () => {
     const name = store.get("name");
     mainWindow.webContents.send("sendName", name);
   });
-  // Will need to change name out for goal,
-  /*
-  'goal', {title: '', done: '', extraInfo: ''}
-  */
+
   ipcMain.on("name", (_, name) => {
     store.set("name", { name });
     mainWindow.webContents.send("sendName", { name });
   });
 
-  ipcMain.on('newTask', (_, task) => {
-    store.set(`task.${task}`, task)
-    const getTask = store.get('task')
-    mainWindow.webContents.send('sendTask', getTask)
-  })
+  ipcMain.on("newTask", (_, task) => {
+    store.set(`task.${task}`, task);
+    const getTask = store.get("task");
+    mainWindow.webContents.send("sendTask", getTask);
+  });
 
-  ipcMain.on('getTask', () => {
-    const task = store.get('task')
-    mainWindow.webContents.send('sendTask',task)
-  })
+  ipcMain.on("getTask", () => {
+    const task = store.get("task");
+    mainWindow.webContents.send("sendTask", task);
+  });
 
-  ipcMain.on('delTask', (_, task) => {
-    store.delete(`task.${task}`)
-    const getTask = store.get('task')
-    mainWindow.webContents.send('sendTask', getTask)
-  })
+  ipcMain.on("delTask", (_, task) => {
+    store.delete(`task.${task}`);
+    const getTask = store.get("task");
+    mainWindow.webContents.send("sendTask", getTask);
+  });
 };
 
 // This method will be called when Electron has finished

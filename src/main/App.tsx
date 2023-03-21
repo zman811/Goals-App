@@ -70,8 +70,12 @@ export default function Main() {
           <Space h="lg" />
           <Text>{name.name}</Text>
         </div>
-        <Button onClick={() => window.store.newTask('testing3')}>test add</Button>
-        <Button onClick={() => window.store.delTask('testing3')}>test del</Button>
+        <Button onClick={() => window.store.newTask("testing3")}>
+          test add
+        </Button>
+        <Button onClick={() => window.store.delTask("testing3")}>
+          test del
+        </Button>
       </Center>
     </main>
   );

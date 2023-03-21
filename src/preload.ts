@@ -5,7 +5,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("store", {
-
   name: (name: string) => ipcRenderer.send("name", name),
 
   getName: () => ipcRenderer.send("getName"),
@@ -13,12 +12,11 @@ contextBridge.exposeInMainWorld("store", {
   reciveName: (fn: (name: string) => void) =>
     ipcRenderer.on("sendName", (_, name) => fn(name)),
 
-  newTask: (task: string) => ipcRenderer.send('newTask', task),
+  newTask: (task: string) => ipcRenderer.send("newTask", task),
 
-  getTask: () => ipcRenderer.send('getTask'),
+  getTask: () => ipcRenderer.send("getTask"),
 
-  reciveTask: (fn) => ipcRenderer.on('sendTask', (_, task) => fn(task)),
+  reciveTask: (fn) => ipcRenderer.on("sendTask", (_, task) => fn(task)),
 
-  delTask: (task: string) => ipcRenderer.send('delTask', task)
-
+  delTask: (task: string) => ipcRenderer.send("delTask", task),
 });
