@@ -27,6 +27,7 @@ export default function Main() {
   const [addGoal, setAddGoal] = useState(false);
   const [name, setName] = useState({ name: "" });
   const [val, setVal] = useState("");
+  const [task, setTask] = useState({})
 
   useEffect(() => {
     window.store.reciveName((arg: { name: string }) => setName(arg));
@@ -76,6 +77,7 @@ export default function Main() {
         <Button onClick={() => window.store.delTask("testing3")}>
           test del
         </Button>
+        {/* need to add in a map or something to go throught the object and display each val*/}
       </Center>
     </main>
   );
