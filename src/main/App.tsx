@@ -27,14 +27,22 @@ export default function Main() {
   const [addGoal, setAddGoal] = useState(false);
   const [name, setName] = useState({ name: "" });
   const [val, setVal] = useState("");
-  const [task, setTask] = useState({})
+  const [task, setTask] = useState([]);
 
   useEffect(() => {
     window.store.reciveName((arg: { name: string }) => setName(arg));
     window.store.getName();
   }, []);
   useEffect(() => {
-    window.store.reciveTask((a) => console.log(a));
+    window.store.reciveTask((a) => {
+      const temp = [];
+      for (const [key, value] of Object.entries(a)) {
+        // let obj = {[key]: value}
+        temp.push([key, value]);
+      }
+      console.log(temp);
+      setTask(temp);
+    });
     window.store.getTask();
   }, []);
 
@@ -77,7 +85,12 @@ export default function Main() {
         <Button onClick={() => window.store.delTask("testing3")}>
           test del
         </Button>
-        {/* need to add in a map or something to go throught the object and display each val*/}
+        <Space h="lg"/>
+        {task.map((val) => (
+          <Text>
+            {val[0]}, {val[1]}
+          </Text>
+        ))}
       </Center>
     </main>
   );
