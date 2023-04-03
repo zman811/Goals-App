@@ -37,7 +37,6 @@ export default function Main() {
     window.store.reciveTask((a) => {
       const temp = [];
       for (const [key, value] of Object.entries(a)) {
-        // let obj = {[key]: value}
         temp.push([key, value]);
       }
       console.log(temp);
@@ -78,19 +77,22 @@ export default function Main() {
           </Modal>
           <Space h="lg" />
           <Text>{name.name}</Text>
+          <Button onClick={() => window.store.newTask("testing3")}>
+            test add
+          </Button>
+          <Button onClick={() => window.store.delTask("testing3")}>
+            test del
+          </Button>
+          <Space h="lg" />
+          {task.map((val) => (
+            <div key={val[0]}>
+              <Text>
+                {val[0]}, {val[1]}
+              </Text>
+              <Button onClick={() => window.store.delTask(val[0])}>Del</Button>
+            </div>
+          ))}
         </div>
-        <Button onClick={() => window.store.newTask("testing3")}>
-          test add
-        </Button>
-        <Button onClick={() => window.store.delTask("testing3")}>
-          test del
-        </Button>
-        <Space h="lg"/>
-        {task.map((val) => (
-          <Text>
-            {val[0]}, {val[1]}
-          </Text>
-        ))}
       </Center>
     </main>
   );
