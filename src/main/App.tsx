@@ -60,10 +60,13 @@ export default function Main() {
             <Text>What do you need to get done?</Text>
             <Space h="md" />
             <form
-              onSubmit={() => {
+              onSubmit={(e) => {
+                e.preventDefault();
                 if (val === "") return;
                 window.store.name(val);
+                window.store.newTask(val);
                 setVal("");
+                setAddGoal(false);
               }}
             >
               {/* set this up to change state and save the value to files */}
@@ -80,9 +83,9 @@ export default function Main() {
           <Button onClick={() => window.store.newTask("testing3")}>
             test add
           </Button>
-          <Button onClick={() => window.store.delTask("testing3")}>
+          {/* <Button onClick={() => window.store.delTask("testing3")}>
             test del
-          </Button>
+          </Button> */}
           <Space h="lg" />
           {task.map((val) => (
             <div key={val[0]}>
