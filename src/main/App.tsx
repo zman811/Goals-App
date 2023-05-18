@@ -71,6 +71,7 @@ export default function Main() {
             >
               {/* set this up to change state and save the value to files */}
               <Input
+                placeholder="Title"
                 value={val}
                 onChange={(e) => setVal(e.target.value)}
               ></Input>
@@ -79,21 +80,17 @@ export default function Main() {
             </form>
           </Modal>
           <Space h="lg" />
-          <Text>{name.name}</Text>
-          <Button onClick={() => window.store.newTask("testing3")}>
-            test add
-          </Button>
-          {/* <Button onClick={() => window.store.delTask("testing3")}>
-            test del
-          </Button> */}
+          {/* <Text>{name.name}</Text> */}
           <Space h="lg" />
           {task.map((val) => (
+            <>
+            <Space h="lg"/>
             <div key={val[0]}>
-              <Text>
-                {val[0]}, {val[1]}
-              </Text>
+              <Text>{val[0]}</Text>
               <Button onClick={() => window.store.delTask(val[0])}>Del</Button>
             </div>
+            <Space h="lg"/>
+            </>
           ))}
         </div>
       </Center>
