@@ -62,7 +62,7 @@ const createWindow = (): void => {
     mainWindow.webContents.send("sendName", { name });
   });
 
-  ipcMain.on("newTask", (_, task) => {
+  ipcMain.on("newTask", (_, task) => { //send array with the task and task descripoton
     store.set(`task.${task}`, task);
     const getTask = store.get("task");
     mainWindow.webContents.send("sendTask", getTask);
