@@ -11,11 +11,11 @@ contextBridge.exposeInMainWorld("store", {
   reciveName: (fn: (name: string) => void) =>
     ipcRenderer.on("sendName", (_, name) => fn(name)),
 
-  newTask: (task: string) => ipcRenderer.send("newTask", task),
+  newTask: (task: {a:string, b:string}) => ipcRenderer.send("newTask", task),
 
   getTask: () => ipcRenderer.send("getTask"),
 
-  reciveTask: (fn) => ipcRenderer.on("sendTask", (_, task) => fn(task)),
+  reciveTask: (fn: (a: string) => void) => ipcRenderer.on("sendTask", (_, task) => fn(task)),
 
   delTask: (task: string) => ipcRenderer.send("delTask", task),
 });

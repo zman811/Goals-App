@@ -15,7 +15,7 @@ declare global {
       getName: () => void;
       name: (a: string) => void;
 
-      newTask: (a: string) => void;
+      newTask: (a: {title:string, des:string}) => void;
       getTask: () => void;
       reciveTask: (a: any) => void;
       delTask: (a: string) => void;
@@ -27,6 +27,7 @@ export default function Main() {
   const [addGoal, setAddGoal] = useState(false);
   const [name, setName] = useState({ name: "" });
   const [val, setVal] = useState("");
+  const [description, setDescription] = useState("");
   const [task, setTask] = useState([]);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function Main() {
     window.store.getName();
   }, []);
   useEffect(() => {
-    window.store.reciveTask((a) => {
+    window.store.reciveTask((a:any) => {
       const temp = [];
       for (const [key, value] of Object.entries(a)) {
         temp.push([key, value]);
@@ -63,9 +64,11 @@ export default function Main() {
               onSubmit={(e) => {
                 e.preventDefault();
                 if (val === "") return;
+                const obj = {title: val, des: description}
                 window.store.name(val);
-                window.store.newTask(val);
+                window.store.newTask(obj);
                 setVal("");
+                setDescription("");
                 setAddGoal(false);
               }}
             >
@@ -76,6 +79,12 @@ export default function Main() {
                 onChange={(e) => setVal(e.target.value)}
               ></Input>
               <Space h="lg" />
+              <Input
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <Space h="lg" />
               <input type="submit" />
             </form>
           </Modal>
@@ -83,14 +92,17 @@ export default function Main() {
           {/* <Text>{name.name}</Text> */}
           <Space h="lg" />
           {task.map((val) => (
-            <>
-            <Space h="lg"/>
             <div key={val[0]}>
-              <Text>{val[0]}</Text>
-              <Button onClick={() => window.store.delTask(val[0])}>Del</Button>
+              <Space h="lg" />
+              <div>
+                <Text size="xl">{val[0]}</Text>
+                <Text>{val[1]}</Text>
+                <Button onClick={() => window.store.delTask(val[0])}>
+                  Del
+                </Button>
+              </div>
+              <Space h="lg" />
             </div>
-            <Space h="lg"/>
-            </>
           ))}
         </div>
       </Center>
