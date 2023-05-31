@@ -35,7 +35,7 @@ export default function Main() {
     window.store.getName();
   }, []);
   useEffect(() => {
-    window.store.reciveTask((a:any) => {
+    window.store.reciveTask((a: Record<string, unknown>) => {
       const temp = [];
       for (const [key, value] of Object.entries(a)) {
         temp.push([key, value]);
