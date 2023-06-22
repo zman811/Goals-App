@@ -7,6 +7,7 @@ import {
   Space,
   Modal,
 } from "@mantine/core";
+import Timer from "../helpers/timer";
 import React, { useState, useEffect } from "react";
 declare global {
   interface Window {
@@ -51,6 +52,7 @@ export default function Main() {
       <Center>
         <div style={{ textAlign: "center" }}>
           <Title order={1}>Get it done!</Title>
+          <Timer initialSeconds={50}/>
           <Space h="lg" />
           <Button onClick={() => setAddGoal(true)}>Add Goal/Task</Button>
           <Modal
