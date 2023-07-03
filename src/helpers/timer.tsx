@@ -23,5 +23,5 @@ export default (props: any) => {
             clearInterval(myInterval);
           };
     });
-    return <div>timer, {seconds}</div>
+    return <div>timer, {seconds} <button>test</button></div>
 };
