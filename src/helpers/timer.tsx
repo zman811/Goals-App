@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default (props: any) => {
+export default (props: { initialMinute: number; initialSeconds: number }) => {
   const { initialMinute = 0, initialSeconds = 0 } = props;
   const [minutes, setMinutes] = useState(initialMinute);
   const [seconds, setSeconds] = useState(initialSeconds);
@@ -30,10 +30,15 @@ export default (props: any) => {
     <div>
       timer, {seconds} <button onClick={() => setIsTimer(true)}>start</button>
       <button onClick={() => setIsTimer(false)}>stop</button>
-      <button onClick={() => {
-        setMinutes(initialMinute);
-        setSeconds(initialSeconds);
-      }}>reset</button>
+      <button
+        onClick={() => {
+          setMinutes(initialMinute);
+          setSeconds(initialSeconds);
+          setIsTimer(false);
+        }}
+      >
+        reset
+      </button>
     </div>
   );
 };

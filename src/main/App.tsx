@@ -16,8 +16,10 @@ declare global {
       getName: () => void;
       name: (a: string) => void;
 
-      newTask: (a: {title:string, des:string}) => void;
+      newTask: (a: { title: string; des: string }) => void;
       getTask: () => void;
+      // * this is disabled because of a werid typeing error, it is type checked later
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       reciveTask: (a: any) => void;
       delTask: (a: string) => void;
     };
@@ -26,22 +28,21 @@ declare global {
 
 export default function Main() {
   const [addGoal, setAddGoal] = useState(false);
-  const [name, setName] = useState({ name: "" });
+  // const [name, setName] = useState({ name: "" });
   const [val, setVal] = useState("");
   const [description, setDescription] = useState("");
   const [task, setTask] = useState([]);
 
-  useEffect(() => {
-    window.store.reciveName((arg: { name: string }) => setName(arg));
-    window.store.getName();
-  }, []);
+  // useEffect(() => {
+  //   window.store.reciveName((arg: { name: string }) => setName(arg));
+  //   window.store.getName();
+  // }, []);
   useEffect(() => {
     window.store.reciveTask((a: Record<string, unknown>) => {
       const temp = [];
       for (const [key, value] of Object.entries(a)) {
         temp.push([key, value]);
       }
-      console.log(temp);
       setTask(temp);
     });
     window.store.getTask();
@@ -52,7 +53,7 @@ export default function Main() {
       <Center>
         <div style={{ textAlign: "center" }}>
           <Title order={1}>Get it done!</Title>
-          <Timer initialSeconds={50}/>
+          <Timer initialMinute={0} initialSeconds={50} />
           <Space h="lg" />
           <Button onClick={() => setAddGoal(true)}>Add Goal/Task</Button>
           <Modal
@@ -66,7 +67,7 @@ export default function Main() {
               onSubmit={(e) => {
                 e.preventDefault();
                 if (val === "") return;
-                const obj = {title: val, des: description}
+                const obj = { title: val, des: description };
                 window.store.name(val);
                 window.store.newTask(obj);
                 setVal("");
@@ -74,7 +75,6 @@ export default function Main() {
                 setAddGoal(false);
               }}
             >
-              {/* set this up to change state and save the value to files */}
               <Input
                 placeholder="Title"
                 value={val}
