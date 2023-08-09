@@ -91,7 +91,6 @@ export default function Main() {
             </form>
           </Modal>
           <Space h="lg" />
-          {/* <Text>{name.name}</Text> */}
           <Space h="lg" />
           {task.map((val) => (
             <div key={val[0]}>
@@ -100,8 +99,9 @@ export default function Main() {
                 <Text size="xl">{val[0]}</Text>
                 <Text>{val[1]}</Text>
                 <Button onClick={() => window.store.delTask(val[0])}>
-                  Del
+                  Remove
                 </Button>
+                {/* need to add in a way to add a timer to each task */}
               </div>
               <Space h="lg" />
             </div>
