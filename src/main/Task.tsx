@@ -76,7 +76,9 @@ export default function Task() {
           </Modal>
           <Space h="lg" />
           <Space h="lg" />
-          {task.map((val) => (
+          {task.map((val) => {
+            // let timerTime = undefined
+            return(
             <div key={val[0]}>
               <Space h="lg" />
               <div>
@@ -85,11 +87,12 @@ export default function Task() {
                 <Button onClick={() => window.store.delTask(val[0])}>
                   Remove
                 </Button>
+                <Timer initialSeconds={50} initialMinute={0}/>
                 {/* need to add in a way to add a timer to each task */}
               </div>
               <Space h="lg" />
             </div>
-          ))}
+          )})}
         </div>
       </Center>
     </main>
