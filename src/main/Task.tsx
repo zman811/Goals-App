@@ -37,7 +37,7 @@ export default function Task() {
       <Center>
         <div style={{ textAlign: "center" }}>
           <Title order={1}>Get it done!</Title>
-          <Timer initialMinute={0} initialSeconds={50} />
+          <Timer />
           <Space h="lg" />
           <Button onClick={() => setAddGoal(true)}>Add Goal/Task</Button>
           <Modal
