@@ -52,18 +52,25 @@ export default (props: { initialMinute: number; initialSeconds: number }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          setMinutes(inputMin);
-          setSeconds(inputSec);
+          if ((inputMin >= 0 && inputMin <= 60) && (inputSec >= 0 && inputSec <= 60)) {
+            setMinutes(inputMin);
+            setSeconds(inputSec);
+          } else {
+            setInputMin(0);
+            setInputSec(0);
+          }
         }}
       >
         Set a timer!
         <input
           placeholder="min"
           onChange={(e) => setInputMin(e.target.value)}
+          value={inputMin}
         />
         <input
           placeholder=" sec"
           onChange={(e) => setInputSec(e.target.value)}
+          value={inputSec}
         />
         <input type="submit" />
       </form>
