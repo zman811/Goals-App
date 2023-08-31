@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default (props: { initialMinute: number; initialSeconds: number }) => {
+export default (props: { initialMinute?: number; initialSeconds?: number }) => {
   // Maybe set initials to undeifnd if not passed in, then have prompt to ask for them
   const { initialMinute = undefined, initialSeconds = undefined } = props;
   const [minutes, setMinutes] = useState(initialMinute);
